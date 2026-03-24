@@ -5,9 +5,29 @@ import Footer from '../components/Footer.astro';
 
 <BaseLayout
   title="Privacy Policy - EV Charge Tracker"
-  description="Privacy Policy for EV Charge Tracker iOS app. Learn how we protect your data and respect your privacy."
+  description="Privacy Policy for EV Charge Tracker iOS app. Learn how we handle your data, protect your privacy, and store all information locally on your device."
   ogUrl="https://evchargetracker.app/privacy-policy/"
 >
+  <script type="application/ld+json" is:inline slot="jsonld">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Home",
+          "item": "https://evchargetracker.app/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Privacy Policy",
+          "item": "https://evchargetracker.app/privacy-policy/"
+        }
+      ]
+    }
+  </script>
   <main class="page">
     <a href="/" class="back-link">&larr; Back to Home</a>
 
@@ -61,7 +81,7 @@ import Footer from '../components/Footer.astro';
         <li>Your charging sessions, vehicle data, and expense records are backed up to your personal iCloud account</li>
         <li>Backups are encrypted by Apple and protected by your Apple ID</li>
         <li>Data is accessible only through your iCloud account</li>
-        <li>Backup and sync is subject to <a href="https://www.apple.com/legal/privacy/" target="_blank">Apple's Privacy
+        <li>Backup and sync is subject to <a href="https://www.apple.com/legal/privacy/" target="_blank" rel="noopener noreferrer">Apple's Privacy
             Policy</a></li>
       </ul>
       <p>You can enable or disable iCloud backup at any time in the app settings. If disabled, all data remains stored
@@ -87,7 +107,7 @@ import Footer from '../components/Footer.astro';
       <p>Google Analytics data is:</p>
       <ul>
         <li>Anonymous and does not include your personal charging data, vehicle information, or expense records</li>
-        <li>Processed by Google in accordance with <a href="https://policies.google.com/privacy" target="_blank">Google's
+        <li>Processed by Google in accordance with <a href="https://policies.google.com/privacy" target="_blank" rel="noopener noreferrer">Google's
             Privacy Policy</a></li>
         <li>Used solely to improve app functionality and user experience</li>
       </ul>
@@ -143,7 +163,7 @@ import Footer from '../components/Footer.astro';
       <p>
         <strong>Email</strong>: <a href="mailto:maximgorbatyuk191093@gmail.com">maximgorbatyuk191093@gmail.com</a><br>
         <strong>GitHub</strong>: <a href="https://github.com/maximgorbatyuk/ev-charging-tracker"
-          target="_blank">https://github.com/maximgorbatyuk/ev-charging-tracker</a>
+          target="_blank" rel="noopener noreferrer">https://github.com/maximgorbatyuk/ev-charging-tracker</a>
       </p>
 
       <h2>Consent</h2>

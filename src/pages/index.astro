@@ -8,11 +8,57 @@ import Footer from '../components/Footer.astro';
 ---
 
 <BaseLayout
-  title="EV Charge Tracker - Track Your Electric Vehicle Expenses Costs"
+  title="EV Charge Tracker - Track Your EV Costs"
   description="Track your electric vehicle charging sessions and expenses, monitor costs per kilometer, and optimize your EV charging experience with our iOS app."
   ogUrl="https://evchargetracker.app/"
   includeJsonLd={true}
 >
+  <script type="application/ld+json" is:inline slot="jsonld">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Home",
+          "item": "https://evchargetracker.app/"
+        }
+      ]
+    }
+  </script>
+  <script type="application/ld+json" is:inline slot="jsonld">
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "What is EV Charge Tracker?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "EV Charge Tracker is an iOS app that helps you track your electric vehicle charging sessions and expenses, monitor costs per kilometer, and optimize your EV charging experience."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How does EV Charge Tracker work?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Add your car to track, log your first charging session or expenses, and see your expenses history and costs with detailed charts and statistics."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Is my data private?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "All your data is stored locally on your device. We do not collect, transfer, or share your personal information with any third parties."
+          }
+        }
+      ]
+    }
+  </script>
   <main class="page">
     <Hero />
     <Showcase />

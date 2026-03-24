@@ -6,30 +6,31 @@
     <div class="carousel-container">
       <div class="carousel-slides">
         <div class="carousel-slide">
-          <img class="carousel-image" src="/assets/car_ride_stats.PNG" alt="App screenshot 1"
+          <img class="carousel-image" src="/assets/car_ride_stats.webp" alt="Cost per kilometer analysis screen showing charging session details and driving efficiency metrics" width="800" height="1738"
             id="car-ride-stats-screen" />
         </div>
         <div class="carousel-slide">
-          <img class="carousel-image" src="/assets/car_stats.PNG" alt="App screenshot 2" id="car-stats-screen" />
+          <img class="carousel-image" src="/assets/car_stats.webp" alt="Smart statistics screen displaying expense charts for the last 6 months" width="800" height="1738" id="car-stats-screen" loading="lazy" />
         </div>
         <div class="carousel-slide">
-          <img class="carousel-image" src="/assets/car_expenses.PNG" alt="App screenshot 3"
-            id="car-expenses-screen" />
+          <img class="carousel-image" src="/assets/car_expenses.webp" alt="Detailed expenses history screen with charging sessions and cost records" width="800" height="1738"
+            id="car-expenses-screen" loading="lazy" />
         </div>
         <div class="carousel-slide">
-          <img class="carousel-image" src="/assets/planned_maintenance.PNG" alt="App screenshot 4"
-            id="planned-maintenance-screen" />
+          <img class="carousel-image" src="/assets/planned_maintenance.webp" alt="Planned maintenance screen showing scheduled service tasks and reminders" width="800" height="1738"
+            id="planned-maintenance-screen" loading="lazy" />
         </div>
       </div>
     </div>
     <div class="carousel-controls">
-      <button class="carousel-btn carousel-btn-prev" aria-label="Previous slide">&larr;</button>
+      <button class="carousel-btn carousel-btn-prev" aria-label="Previous slide"><span aria-hidden="true">&larr;</span></button>
       <div class="carousel-dots"></div>
-      <button class="carousel-btn carousel-btn-next" aria-label="Next slide">&rarr;</button>
+      <button class="carousel-btn carousel-btn-next" aria-label="Next slide"><span aria-hidden="true">&rarr;</span></button>
     </div>
   </div>
 
   <div class="showcase-features">
+    <h2 class="sr-only">Features</h2>
     <article class="card" style="animation-delay: 0.05s" id="car-ride-stats-article">
       <h3><a href="#" class="screen-link" data-slide="0">Cost Per Kilometer Analysis</a></h3>
       <p>
@@ -67,6 +68,24 @@
     </article>
   </div>
 </section>
+
+<style is:global>
+  .carousel-image {
+    height: auto;
+  }
+
+  .sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border-width: 0;
+  }
+</style>
 
 <script>
   // Carousel functionality
