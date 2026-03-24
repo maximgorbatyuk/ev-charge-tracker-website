@@ -1,0 +1,23 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Hero from '../components/Hero.astro';
+import Showcase from '../components/Showcase.astro';
+import Callout from '../components/Callout.astro';
+import Legal from '../components/Legal.astro';
+import Footer from '../components/Footer.astro';
+---
+
+<BaseLayout
+  title="EV Charge Tracker - Track Your Electric Vehicle Expenses Costs"
+  description="Track your electric vehicle charging sessions and expenses, monitor costs per kilometer, and optimize your EV charging experience with our iOS app."
+  ogUrl="https://evchargetracker.app/"
+  includeJsonLd={true}
+>
+  <main class="page">
+    <Hero />
+    <Showcase />
+    <Callout />
+    <Legal />
+    <Footer />
+  </main>
+</BaseLayout>
