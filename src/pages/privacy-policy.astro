@@ -1,7 +1,6 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
-
-const currentYear = new Date().getFullYear();
+import Footer from '../components/Footer.astro';
 ---
 
 <BaseLayout
@@ -151,26 +150,7 @@ const currentYear = new Date().getFullYear();
       <p>By using EV Charge Tracker, you consent to this Privacy Policy and agree to its terms.</p>
     </div>
 
-    <section class="footer">
-      <div>
-        <span>EV Charge Tracker</span>
-        <span>&middot;</span>
-        <a href="https://apps.apple.com/app/id6754165643" target="_blank">App Store</a>
-        <span>&middot;</span>
-        <a href="/privacy-policy/">Privacy Policy</a>
-        <span>&middot;</span>
-        <a href="https://github.com/maximgorbatyuk/ev-charging-tracker" target="_blank">GitHub</a>
-        <span>&middot;</span>
-        <a href="https://github.com/maximgorbatyuk/ev-charging-tracker/issues" target="_blank">Feedback</a>
-      </div>
-
-      <div class="footer-bottom">
-        <p>&copy; {currentYear} <a
-            href="https://mgorbatyuk.dev?utm_source=ev-charging-tracker&utm_medium=referral&utm_campaign=footer"
-            target="_blank">Maxim
-            Gorbatyuk</a>. Open source project under MIT License.</p>
-      </div>
-    </section>
+    <Footer />
   </main>
 </BaseLayout>
 
