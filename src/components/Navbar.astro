@@ -1,35 +1,43 @@
 ---
-// Navbar - logo + app name on left, links + language selector on right
+import type { Locale } from '../i18n/ui';
+import { useTranslations, locales, localeNames, localeCodes, getLocalizedPath, getCurrentPath } from '../i18n/ui';
+
+interface Props { lang?: Locale; }
+const { lang = 'en' } = Astro.props;
+const t = useTranslations(lang);
+const currentPath = getCurrentPath(Astro.url);
+const privacyUrl = getLocalizedPath(lang, '/privacy-policy/');
 ---
 <nav class="navbar">
-  <a href="/" class="navbar-brand">
+  <a href={getLocalizedPath(lang, '/')} class="navbar-brand">
     <img src="/assets/app_icon.png" alt="EV Charge Tracker" width="36" height="36" class="navbar-logo" />
     <span class="navbar-name">EV Charge Tracker</span>
   </a>
 
-  <button class="navbar-toggle" aria-label="Toggle menu" aria-expanded="false">
+  <button class="navbar-toggle" aria-label={t('nav.toggleMenu')} aria-expanded="false">
     <span class="navbar-toggle-bar"></span>
     <span class="navbar-toggle-bar"></span>
     <span class="navbar-toggle-bar"></span>
   </button>
 
   <div class="navbar-links">
-    <a href="/privacy-policy/">Privacy Policy</a>
-    <a href="https://github.com/maximgorbatyuk/ev-charging-tracker" target="_blank" rel="noopener noreferrer">GitHub</a>
+    <a href={privacyUrl}>{t('nav.privacyPolicy')}</a>
+    <a href="https://github.com/maximgorbatyuk/ev-charging-tracker" target="_blank" rel="noopener noreferrer">{t('nav.github')}</a>
     <div class="navbar-lang">
-      <button class="navbar-lang-btn" aria-label="Select language" aria-expanded="false">
+      <button class="navbar-lang-btn" aria-label={t('nav.selectLanguage')} aria-expanded="false">
         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M2 12h20"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
-        EN
+        {localeCodes[lang]}
         <svg class="navbar-lang-chevron" xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
       </button>
       <div class="navbar-lang-menu">
-        <button class="navbar-lang-option active" data-lang="en">English</button>
-        <button class="navbar-lang-option" data-lang="de" disabled>Deutsch</button>
-        <button class="navbar-lang-option" data-lang="ru" disabled>Русский</button>
-        <button class="navbar-lang-option" data-lang="tr" disabled>Türkçe</button>
-        <button class="navbar-lang-option" data-lang="uk" disabled>Українська</button>
-        <button class="navbar-lang-option" data-lang="kk" disabled>Қазақша</button>
-        <button class="navbar-lang-option" data-lang="zh" disabled>中文</button>
+        {locales.map((locale) => (
+          <a
+            class={`navbar-lang-option ${locale === lang ? 'active' : ''}`}
+            href={getLocalizedPath(locale, currentPath)}
+          >
+            {localeNames[locale]}
+          </a>
+        ))}
       </div>
     </div>
   </div>
@@ -108,7 +116,6 @@
     color: var(--call-to-action-dark);
   }
 
-  /* Language dropdown */
   .navbar-lang {
     position: relative;
   }
@@ -173,24 +180,19 @@
     text-align: left;
     cursor: pointer;
     transition: background 0.15s ease;
+    text-decoration: none;
   }
 
-  .navbar-lang-option:hover:not(:disabled) {
+  .navbar-lang-option:hover {
     background: var(--bg-alt);
     color: var(--ink);
   }
 
-  .navbar-lang-option.active {
+  a.navbar-lang-option.active {
     color: var(--ink);
     font-weight: 700;
   }
 
-  .navbar-lang-option:disabled {
-    opacity: 0.45;
-    cursor: not-allowed;
-  }
-
-  /* Mobile */
   @media (max-width: 860px) {
     .navbar-toggle {
       display: flex;
@@ -261,7 +263,6 @@
 </style>
 
 <script>
-  // Mobile menu toggle
   const navbar = document.querySelector('.navbar')!;
   const toggle = document.querySelector('.navbar-toggle')!;
 
@@ -271,7 +272,6 @@
     toggle.setAttribute('aria-expanded', String(!isOpen));
   });
 
-  // Language dropdown toggle
   const langContainer = document.querySelector('.navbar-lang')!;
   const langBtn = document.querySelector('.navbar-lang-btn')!;
 
@@ -281,7 +281,6 @@
     langBtn.setAttribute('aria-expanded', String(!isOpen));
   });
 
-  // Close dropdown on outside click
   document.addEventListener('click', (e) => {
     if (!langContainer.contains(e.target as Node)) {
       langContainer.setAttribute('data-open', 'false');

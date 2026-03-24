@@ -6,12 +6,18 @@ import Callout from '../components/Callout.astro';
 import Legal from '../components/Legal.astro';
 import Footer from '../components/Footer.astro';
 import Navbar from '../components/Navbar.astro';
+import { useTranslations } from '../i18n/ui';
+import type { Locale } from '../i18n/ui';
+
+const lang: Locale = 'en';
+const t = useTranslations(lang);
 ---
 
 <BaseLayout
-  title="EV Charge Tracker - Track Your EV Costs"
-  description="Track your electric vehicle charging sessions and expenses, monitor costs per kilometer, and optimize your EV charging experience with our iOS app."
+  title={t('meta.title')}
+  description={t('meta.description')}
   ogUrl="https://evchargetracker.app/"
+  lang={lang}
   includeJsonLd={true}
 >
   <script type="application/ld+json" is:inline slot="jsonld">
@@ -61,11 +67,11 @@ import Navbar from '../components/Navbar.astro';
     }
   </script>
   <main class="page">
-    <Navbar />
-    <Hero />
-    <Showcase />
-    <Callout />
-    <Legal />
-    <Footer />
+    <Navbar lang={lang} />
+    <Hero lang={lang} />
+    <Showcase lang={lang} />
+    <Callout lang={lang} />
+    <Legal lang={lang} />
+    <Footer lang={lang} />
   </main>
 </BaseLayout>

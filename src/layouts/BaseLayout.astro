@@ -1,11 +1,14 @@
 ---
 import '../styles/brutalism-style.css';
 import GoogleAnalytics from '../components/GoogleAnalytics.astro';
+import type { Locale } from '../i18n/ui';
+import { locales, localeRegions, ogLocales, getLocalizedPath, getCurrentPath } from '../i18n/ui';
 
 interface Props {
   title: string;
   description: string;
   ogUrl: string;
+  lang?: Locale;
   ogImage?: string;
   themeColor?: string;
   includeJsonLd?: boolean;
@@ -15,14 +18,18 @@ const {
   title,
   description,
   ogUrl,
+  lang = 'en',
   ogImage = 'https://evchargetracker.app/assets/app_icon.png',
   themeColor = '#daf5f0',
   includeJsonLd = false,
 } = Astro.props;
+
+const currentPath = getCurrentPath(Astro.url);
+const site = Astro.site?.origin ?? 'https://evchargetracker.app';
 ---
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang={lang}>
 
 <head>
   <meta charset="UTF-8">
@@ -40,6 +47,7 @@ const {
   <meta property="og:description" content={description}>
   <meta property="og:image" content={ogImage}>
   <meta property="og:site_name" content="EV Charge Tracker">
+  <meta property="og:locale" content={ogLocales[lang]}>
 
   <!-- Twitter -->
   <meta name="twitter:card" content="summary_large_image">
@@ -49,6 +57,11 @@ const {
   <meta name="twitter:image" content={ogImage}>
 
   <link rel="canonical" href={ogUrl} />
+  {locales.map((locale) => (
+    <link rel="alternate" hreflang={localeRegions[locale]} href={`${site}${getLocalizedPath(locale, currentPath)}`} />
+  ))}
+  <link rel="alternate" hreflang="x-default" href={`${site}${currentPath}`} />
+
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="icon" href="/favicon.ico" />

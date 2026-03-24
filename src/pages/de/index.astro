@@ -1,0 +1,31 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Hero from '../../components/Hero.astro';
+import Showcase from '../../components/Showcase.astro';
+import Callout from '../../components/Callout.astro';
+import Legal from '../../components/Legal.astro';
+import Footer from '../../components/Footer.astro';
+import Navbar from '../../components/Navbar.astro';
+import { useTranslations } from '../../i18n/ui';
+import type { Locale } from '../../i18n/ui';
+
+const lang: Locale = 'de';
+const t = useTranslations(lang);
+---
+
+<BaseLayout
+  title={t('meta.title')}
+  description={t('meta.description')}
+  ogUrl="https://evchargetracker.app/de/"
+  lang={lang}
+  includeJsonLd={true}
+>
+  <main class="page">
+    <Navbar lang={lang} />
+    <Hero lang={lang} />
+    <Showcase lang={lang} />
+    <Callout lang={lang} />
+    <Legal lang={lang} />
+    <Footer lang={lang} />
+  </main>
+</BaseLayout>

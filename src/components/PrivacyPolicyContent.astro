@@ -1,0 +1,180 @@
+---
+import type { Locale } from '../i18n/ui';
+import { useTranslations, getLocalizedPath } from '../i18n/ui';
+import Footer from './Footer.astro';
+import Navbar from './Navbar.astro';
+
+interface Props { lang?: Locale; }
+const { lang = 'en' } = Astro.props;
+const t = useTranslations(lang);
+---
+<Navbar lang={lang} />
+
+<div class="back-link-wrapper">
+  <a href={getLocalizedPath(lang, '/')} class="back-link">
+    &larr; {t('privacy.backToHome')}
+  </a>
+</div>
+
+<div class="policy-content">
+  <span class="last-updated">{t('privacy.lastUpdated')}</span>
+  <h1>{t('privacy.title')}</h1>
+
+  <h2>{t('privacy.intro.heading')}</h2>
+  <p>{t('privacy.intro.text')}</p>
+
+  <h2>{t('privacy.collect.heading')}</h2>
+
+  <h3>{t('privacy.collect.provide.heading')}</h3>
+  <p>{t('privacy.collect.provide.text')}</p>
+  <ul>
+    <li><strong>{t('privacy.collect.provide.charging')}</strong></li>
+    <li><strong>{t('privacy.collect.provide.vehicle')}</strong></li>
+    <li><strong>{t('privacy.collect.provide.expense')}</strong></li>
+    <li><strong>{t('privacy.collect.provide.notes')}</strong></li>
+  </ul>
+
+  <h3>{t('privacy.collect.auto.heading')}</h3>
+  <ul>
+    <li><strong>{t('privacy.collect.auto.location')}</strong></li>
+    <li><strong>{t('privacy.collect.auto.usage')}</strong></li>
+    <li><strong>{t('privacy.collect.auto.device')}</strong></li>
+  </ul>
+
+  <h2>{t('privacy.use.heading')}</h2>
+  <p>{t('privacy.use.text')}</p>
+  <ul>
+    <li>{t('privacy.use.core')}</li>
+    <li>{t('privacy.use.reports')}</li>
+    <li>{t('privacy.use.improve')}</li>
+    <li>{t('privacy.use.stats')}</li>
+  </ul>
+
+  <h2>{t('privacy.storage.heading')}</h2>
+  <p>{t('privacy.storage.text')}</p>
+
+  <h2>{t('privacy.icloud.heading')}</h2>
+  <p>{t('privacy.icloud.text')}</p>
+  <ul>
+    <li>{t('privacy.icloud.backup')}</li>
+    <li>{t('privacy.icloud.encrypted')}</li>
+    <li>{t('privacy.icloud.access')}</li>
+    <li>{t('privacy.icloud.apple')}</li>
+  </ul>
+  <p>{t('privacy.icloud.disable')}</p>
+
+  <h2>{t('privacy.location.heading')}</h2>
+  <p>{t('privacy.location.text')}</p>
+  <ul>
+    <li>{t('privacy.location.tag')}</li>
+    <li>{t('privacy.location.identify')}</li>
+  </ul>
+  <p>{t('privacy.location.revoke')}</p>
+
+  <h2>{t('privacy.analytics.heading')}</h2>
+  <p>{t('privacy.analytics.text')}</p>
+  <ul>
+    <li><strong>{t('privacy.analytics.patterns')}</strong></li>
+    <li><strong>{t('privacy.analytics.device')}</strong></li>
+    <li><strong>{t('privacy.analytics.perf')}</strong></li>
+  </ul>
+  <p>{t('privacy.analytics.dataIs')}</p>
+  <ul>
+    <li>{t('privacy.analytics.anonymous')}</li>
+    <li>{t('privacy.analytics.google')}</li>
+    <li>{t('privacy.analytics.sole')}</li>
+  </ul>
+  <p>{t('privacy.analytics.limit')}</p>
+
+  <h2>{t('privacy.sharing.heading')}</h2>
+  <p>{t('privacy.sharing.text')}</p>
+  <p>{t('privacy.sharing.analytics')}</p>
+
+  <h2>{t('privacy.security.heading')}</h2>
+  <p>{t('privacy.security.text')}</p>
+  <ul>
+    <li>{t('privacy.security.local')}</li>
+    <li>{t('privacy.security.noTransfer')}</li>
+    <li>{t('privacy.security.builtin')}</li>
+  </ul>
+
+  <h2>{t('privacy.rights.heading')}</h2>
+  <p>{t('privacy.rights.text')}</p>
+  <ul>
+    <li><strong>{t('privacy.rights.access')}</strong></li>
+    <li><strong>{t('privacy.rights.delete')}</strong></li>
+    <li><strong>{t('privacy.rights.export')}</strong></li>
+    <li><strong>{t('privacy.rights.location')}</strong></li>
+  </ul>
+
+  <h2>{t('privacy.children.heading')}</h2>
+  <p>{t('privacy.children.text')}</p>
+
+  <h2>{t('privacy.changes.heading')}</h2>
+  <p>{t('privacy.changes.text')}</p>
+  <ul>
+    <li>{t('privacy.changes.posting')}</li>
+    <li>{t('privacy.changes.updating')}</li>
+  </ul>
+  <p>{t('privacy.changes.continued')}</p>
+
+  <h2>{t('privacy.retention.heading')}</h2>
+  <p>{t('privacy.retention.text')}</p>
+
+  <h2>{t('privacy.international.heading')}</h2>
+  <p>{t('privacy.international.text')}</p>
+
+  <h2>{t('privacy.contact.heading')}</h2>
+  <p>{t('privacy.contact.text')}</p>
+  <p>
+    <strong>{t('privacy.contact.email')}</strong>: <a href="mailto:maximgorbatyuk191093@gmail.com">maximgorbatyuk191093@gmail.com</a><br>
+    <strong>{t('privacy.contact.github')}</strong>: <a href="https://github.com/maximgorbatyuk/ev-charging-tracker"
+      target="_blank" rel="noopener noreferrer">https://github.com/maximgorbatyuk/ev-charging-tracker</a>
+  </p>
+
+  <h2>{t('privacy.consent.heading')}</h2>
+  <p>{t('privacy.consent.text')}</p>
+</div>
+
+<Footer lang={lang} />
+
+<style is:global>
+  .policy-content {
+    margin-top: 32px;
+    padding: 28px;
+    background: var(--card);
+    border: 2px solid var(--stroke);
+    box-shadow: var(--shadow);
+    border-radius: 18px;
+  }
+  .policy-content h1 { font-size: clamp(1.8rem, 3vw, 2.4rem); margin: 0 0 8px; letter-spacing: -0.03em; }
+  .policy-content h2 { font-size: 1.4rem; margin: 32px 0 12px; padding-bottom: 8px; border-bottom: 2px solid var(--bg-alt); }
+  .policy-content h3 { font-size: 1.1rem; margin: 24px 0 8px; }
+  .policy-content p { color: var(--muted); font-size: 1rem; line-height: 1.7; margin: 12px 0; }
+  .policy-content ul { color: var(--muted); font-size: 1rem; line-height: 1.7; margin: 12px 0; padding-left: 24px; }
+  .policy-content li { margin: 8px 0; }
+  .policy-content a { color: var(--call-to-action-dark); text-decoration: underline; }
+  .policy-content a:hover { color: var(--accent-dark); }
+  .policy-content strong { color: var(--ink); }
+  .last-updated { display: inline-block; padding: 6px 12px; border: 2px solid var(--stroke); border-radius: 999px; background: var(--bg-alt); font-family: "IBM Plex Mono", monospace; font-size: 0.8rem; margin-bottom: 16px; }
+  .back-link-wrapper {
+    margin-bottom: 24px;
+  }
+  .back-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 16px;
+    border: 2px solid var(--stroke);
+    background: var(--call-to-action);
+    color: #111;
+    font-weight: 700;
+    text-decoration: none;
+    box-shadow: 4px 4px 0 var(--stroke);
+    transition: transform 120ms ease, box-shadow 120ms ease;
+  }
+  .back-link:hover {
+    transform: translate(-2px, -2px);
+    box-shadow: 6px 6px 0 var(--stroke);
+  }
+</style>
