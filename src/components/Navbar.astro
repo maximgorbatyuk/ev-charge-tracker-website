@@ -1,0 +1,291 @@
+---
+// Navbar - logo + app name on left, links + language selector on right
+---
+<nav class="navbar">
+  <a href="/" class="navbar-brand">
+    <img src="/assets/app_icon.png" alt="EV Charge Tracker" width="36" height="36" class="navbar-logo" />
+    <span class="navbar-name">EV Charge Tracker</span>
+  </a>
+
+  <button class="navbar-toggle" aria-label="Toggle menu" aria-expanded="false">
+    <span class="navbar-toggle-bar"></span>
+    <span class="navbar-toggle-bar"></span>
+    <span class="navbar-toggle-bar"></span>
+  </button>
+
+  <div class="navbar-links">
+    <a href="/privacy-policy/">Privacy Policy</a>
+    <a href="https://github.com/maximgorbatyuk/ev-charging-tracker" target="_blank" rel="noopener noreferrer">GitHub</a>
+    <div class="navbar-lang">
+      <button class="navbar-lang-btn" aria-label="Select language" aria-expanded="false">
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M2 12h20"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+        EN
+        <svg class="navbar-lang-chevron" xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+      </button>
+      <div class="navbar-lang-menu">
+        <button class="navbar-lang-option active" data-lang="en">English</button>
+        <button class="navbar-lang-option" data-lang="de" disabled>Deutsch</button>
+        <button class="navbar-lang-option" data-lang="ru" disabled>Русский</button>
+        <button class="navbar-lang-option" data-lang="tr" disabled>Türkçe</button>
+        <button class="navbar-lang-option" data-lang="uk" disabled>Українська</button>
+        <button class="navbar-lang-option" data-lang="kk" disabled>Қазақша</button>
+        <button class="navbar-lang-option" data-lang="zh" disabled>中文</button>
+      </div>
+    </div>
+  </div>
+</nav>
+
+<style is:global>
+  .navbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 12px 20px;
+    margin-top: -24px;
+    margin-bottom: 16px;
+    background: var(--card);
+    border: 2px solid var(--stroke);
+    border-radius: 14px;
+    box-shadow: 4px 4px 0 var(--stroke);
+    font-family: "IBM Plex Mono", monospace;
+    position: relative;
+  }
+
+  .navbar-brand {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    text-decoration: none;
+    color: var(--ink);
+    font-weight: 700;
+    font-size: 0.95rem;
+  }
+
+  .navbar-logo {
+    border-radius: 8px;
+    border: 2px solid var(--stroke);
+  }
+
+  .navbar-name {
+    white-space: nowrap;
+  }
+
+  .navbar-toggle {
+    display: none;
+    flex-direction: column;
+    gap: 4px;
+    padding: 6px;
+    background: var(--bg-alt);
+    border: 2px solid var(--stroke);
+    border-radius: 6px;
+    cursor: pointer;
+  }
+
+  .navbar-toggle-bar {
+    display: block;
+    width: 18px;
+    height: 2px;
+    background: var(--ink);
+    border-radius: 1px;
+    transition: transform 0.2s ease, opacity 0.2s ease;
+  }
+
+  .navbar-links {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+  }
+
+  .navbar-links a {
+    color: var(--muted);
+    text-decoration: none;
+    font-size: 0.85rem;
+    font-weight: 600;
+    transition: color 0.2s ease;
+  }
+
+  .navbar-links a:hover {
+    color: var(--call-to-action-dark);
+  }
+
+  /* Language dropdown */
+  .navbar-lang {
+    position: relative;
+  }
+
+  .navbar-lang-btn {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 6px 10px;
+    background: var(--bg-alt);
+    border: 2px solid var(--stroke);
+    border-radius: 8px;
+    font-family: "IBM Plex Mono", monospace;
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: var(--ink);
+    cursor: pointer;
+    transition: background 0.2s ease;
+  }
+
+  .navbar-lang-btn:hover {
+    background: #d9e8da;
+  }
+
+  .navbar-lang-chevron {
+    transition: transform 0.2s ease;
+  }
+
+  .navbar-lang[data-open="true"] .navbar-lang-chevron {
+    transform: rotate(180deg);
+  }
+
+  .navbar-lang-menu {
+    display: none;
+    position: absolute;
+    top: calc(100% + 6px);
+    right: 0;
+    min-width: 140px;
+    padding: 4px;
+    background: var(--card);
+    border: 2px solid var(--stroke);
+    border-radius: 10px;
+    box-shadow: 4px 4px 0 var(--stroke);
+    z-index: 100;
+    flex-direction: column;
+  }
+
+  .navbar-lang[data-open="true"] .navbar-lang-menu {
+    display: flex;
+  }
+
+  .navbar-lang-option {
+    display: block;
+    width: 100%;
+    padding: 8px 12px;
+    background: none;
+    border: none;
+    border-radius: 6px;
+    font-family: "IBM Plex Mono", monospace;
+    font-size: 0.8rem;
+    color: var(--muted);
+    text-align: left;
+    cursor: pointer;
+    transition: background 0.15s ease;
+  }
+
+  .navbar-lang-option:hover:not(:disabled) {
+    background: var(--bg-alt);
+    color: var(--ink);
+  }
+
+  .navbar-lang-option.active {
+    color: var(--ink);
+    font-weight: 700;
+  }
+
+  .navbar-lang-option:disabled {
+    opacity: 0.45;
+    cursor: not-allowed;
+  }
+
+  /* Mobile */
+  @media (max-width: 860px) {
+    .navbar-toggle {
+      display: flex;
+    }
+
+    .navbar-links {
+      display: none;
+      position: absolute;
+      top: calc(100% + 6px);
+      left: 0;
+      right: 0;
+      flex-direction: column;
+      align-items: stretch;
+      gap: 4px;
+      padding: 12px;
+      background: var(--card);
+      border: 2px solid var(--stroke);
+      border-radius: 14px;
+      box-shadow: 4px 4px 0 var(--stroke);
+      z-index: 99;
+    }
+
+    .navbar-links a {
+      display: block;
+      padding: 10px 12px;
+      border-radius: 8px;
+      font-size: 0.9rem;
+    }
+
+    .navbar-links a:hover {
+      background: var(--bg-alt);
+    }
+
+    .navbar[data-menu-open="true"] .navbar-links {
+      display: flex;
+    }
+
+    .navbar[data-menu-open="true"] .navbar-toggle-bar:nth-child(1) {
+      transform: translateY(6px) rotate(45deg);
+    }
+
+    .navbar[data-menu-open="true"] .navbar-toggle-bar:nth-child(2) {
+      opacity: 0;
+    }
+
+    .navbar[data-menu-open="true"] .navbar-toggle-bar:nth-child(3) {
+      transform: translateY(-6px) rotate(-45deg);
+    }
+
+    .navbar-lang {
+      width: 100%;
+    }
+
+    .navbar-lang-btn {
+      width: 100%;
+      padding: 10px 12px;
+      border-radius: 8px;
+      font-size: 0.9rem;
+    }
+
+    .navbar-lang-menu {
+      position: static;
+      margin-top: 4px;
+      box-shadow: none;
+      border: 1px solid rgba(17, 17, 17, 0.15);
+    }
+  }
+</style>
+
+<script>
+  // Mobile menu toggle
+  const navbar = document.querySelector('.navbar')!;
+  const toggle = document.querySelector('.navbar-toggle')!;
+
+  toggle.addEventListener('click', () => {
+    const isOpen = navbar.getAttribute('data-menu-open') === 'true';
+    navbar.setAttribute('data-menu-open', String(!isOpen));
+    toggle.setAttribute('aria-expanded', String(!isOpen));
+  });
+
+  // Language dropdown toggle
+  const langContainer = document.querySelector('.navbar-lang')!;
+  const langBtn = document.querySelector('.navbar-lang-btn')!;
+
+  langBtn.addEventListener('click', () => {
+    const isOpen = langContainer.getAttribute('data-open') === 'true';
+    langContainer.setAttribute('data-open', String(!isOpen));
+    langBtn.setAttribute('aria-expanded', String(!isOpen));
+  });
+
+  // Close dropdown on outside click
+  document.addEventListener('click', (e) => {
+    if (!langContainer.contains(e.target as Node)) {
+      langContainer.setAttribute('data-open', 'false');
+      langBtn.setAttribute('aria-expanded', 'false');
+    }
+  });
+</script>
