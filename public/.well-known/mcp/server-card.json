@@ -1,0 +1,17 @@
+{
+  "serverInfo": {
+    "name": "evchargetracker.app",
+    "version": "0.0.1"
+  },
+  "transports": [
+    {
+      "type": "streamable-http",
+      "endpoint": "https://evchargetracker.app/mcp"
+    }
+  ],
+  "capabilities": {
+    "tools": [],
+    "resources": [],
+    "prompts": []
+  }
+}

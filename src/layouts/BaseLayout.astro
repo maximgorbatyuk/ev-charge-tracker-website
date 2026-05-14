@@ -1,6 +1,7 @@
 ---
 import '../styles/brutalism-style.css';
 import GoogleAnalytics from '../components/GoogleAnalytics.astro';
+import WebMcpTools from '../components/WebMcpTools.astro';
 import type { Locale } from '../i18n/ui';
 import { locales, localeRegions, ogLocales, getLocalizedPath, getCurrentPath } from '../i18n/ui';
 
@@ -105,6 +106,7 @@ const site = Astro.site?.origin ?? 'https://evchargetracker.app';
 
 <body>
   <slot />
+  <WebMcpTools />
 </body>
 
 </html>

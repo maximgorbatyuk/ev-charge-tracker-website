@@ -1,0 +1,12 @@
+{
+  "keys": [
+    {
+      "kty": "RSA",
+      "use": "sig",
+      "alg": "RS256",
+      "kid": "evct-rs256-1",
+      "n": "wGcK7MDRbiuSmvA11jfPqAClW8Et2N1fYBcvvM2qvE2aT0JTYAe7h3wNkgDv8kr0s8rWbSxwLaGQjNwksoImfTQ6f4G1VDQnff2RZsA9f4Rj4Cq4HhYxL6LGd9H2gA52mPqH8Kb8r8WTfn6mP5P7R8gW5f8syF2ZXVvd9M_HqXgrWwNqQ8YCHUP8xH8YvnlQhM2pSTPz6Wv9eSFSf8ZQ8xDvlkzpdM6wO7Yf5u8c6hIfrgNobmCG8A7D4y9OYq9ZQrB2zF-dGQ2fH89Pq9vFCbP3uS58lX5z4yqep4qS8hY8fMBcI6WgT0fT7czA1m2Qx3N8XjT3uKfQ",
+      "e": "AQAB"
+    }
+  ]
+}

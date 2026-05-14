@@ -1,0 +1,186 @@
+<script>
+  (() => {
+    const modelContext = (navigator as Navigator & { modelContext?: any }).modelContext;
+    if (!modelContext) {
+      return;
+    }
+
+    const supportedLocales = ['en', 'de', 'ru', 'tr', 'uk', 'kk', 'zh'];
+    const localeRegex = /^\/(de|ru|tr|uk|kk|zh)(\/|$)/;
+
+    const getCurrentLocale = () => {
+      const match = window.location.pathname.match(/^\/(de|ru|tr|uk|kk|zh)(\/|$)/);
+      return match ? match[1] : 'en';
+    };
+
+    const getPathWithoutLocalePrefix = (pathname: string) => {
+      if (!localeRegex.test(pathname)) {
+        return pathname || '/';
+      }
+
+      const strippedPath = pathname.replace(/^\/(de|ru|tr|uk|kk|zh)/, '');
+      return strippedPath || '/';
+    };
+
+    const buildLocalizedPath = (locale: string, path: string) => {
+      const normalizedPath = path.startsWith('/') ? path : `/${path}`;
+      if (locale === 'en') {
+        return normalizedPath;
+      }
+
+      return normalizedPath === '/' ? `/${locale}/` : `/${locale}${normalizedPath}`;
+    };
+
+    const navigateTo = (path: string) => {
+      const targetUrl = new URL(path, window.location.origin).toString();
+      window.location.assign(targetUrl);
+      return { ok: true, url: targetUrl };
+    };
+
+    const tools = [
+      {
+        name: 'site.open_app_store',
+        description: 'Open the EV Charge Tracker App Store listing.',
+        inputSchema: {
+          type: 'object',
+          properties: {},
+          additionalProperties: false
+        },
+        execute: async () => navigateTo('https://apps.apple.com/app/id6754165643')
+      },
+      {
+        name: 'site.open_privacy_policy',
+        description: 'Open the privacy policy page for the current site language.',
+        inputSchema: {
+          type: 'object',
+          properties: {},
+          additionalProperties: false
+        },
+        execute: async () => {
+          const locale = getCurrentLocale();
+          const localizedPath = buildLocalizedPath(locale, '/privacy-policy/');
+          return navigateTo(localizedPath);
+        }
+      },
+      {
+        name: 'site.set_language',
+        description: 'Switch the website language to a supported locale.',
+        inputSchema: {
+          type: 'object',
+          properties: {
+            locale: {
+              type: 'string',
+              enum: supportedLocales,
+              description: 'Target locale code.'
+            }
+          },
+          required: ['locale'],
+          additionalProperties: false
+        },
+        execute: async (input: { locale: string }) => {
+          const nextLocale = input?.locale;
+          if (!supportedLocales.includes(nextLocale)) {
+            throw new Error(`Unsupported locale: ${String(nextLocale)}`);
+          }
+
+          const currentPath = getPathWithoutLocalePrefix(window.location.pathname);
+          const localizedPath = buildLocalizedPath(nextLocale, currentPath);
+          const targetUrl = `${localizedPath}${window.location.search}${window.location.hash}`;
+          return navigateTo(targetUrl);
+        }
+      },
+      {
+        name: 'site.set_showcase_slide',
+        description: 'Move the homepage showcase carousel to a specific slide index.',
+        inputSchema: {
+          type: 'object',
+          properties: {
+            index: {
+              type: 'integer',
+              minimum: 0,
+              maximum: 3,
+              description: 'Showcase slide index.'
+            }
+          },
+          required: ['index'],
+          additionalProperties: false
+        },
+        execute: async (input: { index: number }) => {
+          const index = input?.index;
+          if (!Number.isInteger(index) || index < 0 || index > 3) {
+            throw new Error('Slide index must be an integer between 0 and 3.');
+          }
+
+          const targetLink = document.querySelector(`.screen-link[data-slide="${index}"]`);
+          if (!targetLink) {
+            throw new Error('Showcase carousel is not available on this page.');
+          }
+
+          targetLink.dispatchEvent(new MouseEvent('click', { bubbles: true, cancelable: true }));
+          return { ok: true, index };
+        }
+      },
+      {
+        name: 'site.get_page_context',
+        description: 'Return lightweight page context for an agent (title, url, language, available actions).',
+        inputSchema: {
+          type: 'object',
+          properties: {},
+          additionalProperties: false
+        },
+        execute: async () => ({
+          title: document.title,
+          url: window.location.href,
+          language: getCurrentLocale(),
+          availableLocales: supportedLocales,
+          hasShowcaseCarousel: Boolean(document.querySelector('.showcase'))
+        })
+      }
+    ];
+
+    const registerWithProvideContext = () => {
+      if (typeof modelContext.provideContext !== 'function') {
+        return false;
+      }
+
+      modelContext.provideContext({ tools });
+      return true;
+    };
+
+    const registerWithRegisterTool = () => {
+      if (typeof modelContext.registerTool !== 'function') {
+        return false;
+      }
+
+      const controller = new AbortController();
+      for (const tool of tools) {
+        try {
+          modelContext.registerTool(tool, { signal: controller.signal });
+        } catch (error) {
+          if (!(error instanceof DOMException) || error.name !== 'InvalidStateError') {
+            throw error;
+          }
+        }
+      }
+
+      window.addEventListener(
+        'pagehide',
+        () => {
+          controller.abort();
+        },
+        { once: true }
+      );
+
+      return true;
+    };
+
+    try {
+      if (registerWithProvideContext()) {
+        return;
+      }
+      registerWithRegisterTool();
+    } catch (error) {
+      console.warn('WebMCP tool registration failed.', error);
+    }
+  })();
+</script>

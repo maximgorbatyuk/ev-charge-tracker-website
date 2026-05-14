@@ -2,7 +2,23 @@
   "linkset": [
     {
       "anchor": "https://evchargetracker.app/.well-known/api-catalog",
-      "item": []
+      "item": [
+        {
+          "href": "https://evchargetracker.app/.well-known/openid-configuration",
+          "rel": "service-desc",
+          "type": "application/json"
+        },
+        {
+          "href": "https://evchargetracker.app/.well-known/oauth-authorization-server",
+          "rel": "service-desc",
+          "type": "application/json"
+        },
+        {
+          "href": "https://evchargetracker.app/.well-known/jwks.json",
+          "rel": "key-set",
+          "type": "application/jwk-set+json"
+        }
+      ]
     }
   ]
 }
