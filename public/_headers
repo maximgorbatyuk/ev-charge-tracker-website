@@ -1,5 +1,6 @@
 # RFC 8288 Link headers for agent discovery (applied by Cloudflare Pages and Netlify).
 # github.com GitHub Pages does not interpret this file; use a CDN Transform Rule or migrate hosting to apply the same Link values.
+# Accept: text/markdown is handled by Cloudflare "Markdown for Agents" (zone setting), not by this file — see CLAUDE.md.
 /*
   Link: </.well-known/api-catalog>; rel="api-catalog"
   Link: </service-desc.json>; rel="service-desc"

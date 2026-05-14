@@ -3,5 +3,9 @@
   "type": "https://schema.org/MobileApplication",
   "url": "https://evchargetracker.app/",
   "description": "Marketing site for the EV Charge Tracker iOS app (charging costs and car expenses).",
-  "publicHttpApis": []
+  "publicHttpApis": [],
+  "markdownContentNegotiation": {
+    "documentation": "https://developers.cloudflare.com/fundamentals/reference/markdown-for-agents/",
+    "clientHint": "Send Accept: text/markdown on the same page URL. When the zone has Cloudflare Markdown for Agents enabled, the edge returns text/markdown and may include x-markdown-tokens."
+  }
 }
