@@ -19,6 +19,7 @@ npm run preview   # Preview production build locally
 **Framework**: Astro 6 (static site, no client-side framework)
 **Styling**: Single global CSS file (`src/styles/brutalism-style.css`) with CSS custom properties — brutalism design system
 **Deployment**: GitHub Actions → GitHub Pages (auto-deploys on push to `main`)
+**Agent discovery (RFC 8288 / RFC 9727)**: `public/_headers` declares `Link` headers for CDNs that support them (for example Cloudflare Pages or Netlify). GitHub Pages does not apply `_headers`; use a CDN Transform Rule or move hosting if tools require real HTTP `Link` headers. `BaseLayout.astro` also emits equivalent `<link rel="api-catalog">`, `<link rel="service-desc">`, and `<link rel="describedby">` in the document.
 **i18n**: Astro native routing, 7 locales (en, de, ru, tr, uk, kk, zh), EN has no URL prefix
 
 ### Layout & Pages

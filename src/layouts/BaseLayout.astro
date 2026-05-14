@@ -57,6 +57,9 @@ const site = Astro.site?.origin ?? 'https://evchargetracker.app';
   <meta name="twitter:image" content={ogImage}>
 
   <link rel="canonical" href={ogUrl} />
+  <link rel="api-catalog" href={`${site}/.well-known/api-catalog`} type="application/linkset+json" />
+  <link rel="service-desc" href={`${site}/service-desc.json`} type="application/json" />
+  <link rel="describedby" href={`${site}${getLocalizedPath(lang, '/privacy-policy/')}`} />
   {locales.map((locale) => (
     <link rel="alternate" hreflang={localeRegions[locale]} href={`${site}${getLocalizedPath(locale, currentPath)}`} />
   ))}
